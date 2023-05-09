@@ -19,5 +19,5 @@ This repository contains exercises and examples for the basic concepts of Python
 * 12-fizzbuzz.py: Implements the FizzBuzz game.
 * 13-insert_number.c, lists.h: Inserts a node into a sorted singly linked list.
 
-## Authors
+## Author
 * Benson Kivuva
