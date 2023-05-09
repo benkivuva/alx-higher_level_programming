@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-lower = True
-for i in range(122, 96, -1):
-    if not lower:
-        i -= 32
-    print("{}".format(chr(i)), end='')
-    lower = not lower
+for i in range(25, -1, -1):
+    c = i + ord('A')
+    if i % 2 == 1:
+        c += 32
+    print("{:c}".format(c), end="")
