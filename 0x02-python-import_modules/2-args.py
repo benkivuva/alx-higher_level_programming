@@ -4,15 +4,16 @@ if __name__ == "__main__":
 
     total_sum = 0
 
-    # Iterate over the command-line arguments
-    for index, value in enumerate(sys.argv):
-        # Skip the first argument, which is the script name itself
-        if index == 0:
-            continue
+    num_arguments = len(sys.argv) - 1
+    argument_string = "argument" if num_arguments == 1 else "arguments"
+    print(f"Number of {argument_string}: {num_arguments}")
 
-        # Convert the argument to an integer and add it to the sum
-        argument = int(value)
-        total_sum += argument
+    for index, value in enumerate(sys.argv[1:], start=1):
+        print(f"{index}: {value}")
+        try:
+            argument = int(value)
+            total_sum += argument
+        except ValueError:
+            pass
 
-    # Print the final sum
     print("Total sum:", total_sum)
