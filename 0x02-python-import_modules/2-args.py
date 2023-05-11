@@ -1,7 +1,18 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import sys
-    sum = 0
-    for i in range(len(sys.argv) - 1):
-        sum += int(sys.argv[i + 1])
-    print(sum)
+
+    total_sum = 0
+
+    # Iterate over the command-line arguments
+    for index, value in enumerate(sys.argv):
+        # Skip the first argument, which is the script name itself
+        if index == 0:
+            continue
+
+        # Convert the argument to an integer and add it to the sum
+        argument = int(value)
+        total_sum += argument
+
+    # Print the final sum
+    print("Total sum:", total_sum)
