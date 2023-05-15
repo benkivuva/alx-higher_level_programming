@@ -1,5 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <stddef.h>
 
 int list_len(listint_t *);
 
