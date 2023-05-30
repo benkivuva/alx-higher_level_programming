@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Define a singly linked list data structure."""
 
+
 class Node:
     """A node in a singly-linked list."""
 
