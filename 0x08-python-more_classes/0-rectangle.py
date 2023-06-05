@@ -3,5 +3,5 @@
 
 
 class Rectangle:
-    """Rectangle class"""
+    """ A Rectangle class"""
     pass
