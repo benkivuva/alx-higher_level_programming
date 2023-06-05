@@ -1,0 +1,55 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+
+# Test cases
+>>> add_integer(1, 2)
+3
+>>> add_integer(1.0, 2.1)
+3
+>>> add_integer(0)
+98
+>>> add_integer(55, 34)
+69
+>>> add_integer(1)
+99
+>>> add_integer(.1)
+98
+>>> add_integer(-1, 1)
+0
+
+# Error cases
+
+# Pass in a string instead of an integer for parameter a
+>>> add_integer("lukaku", 2)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer or b must be an integer
+
+# Pass in a list instead of an integer for parameter a
+>>> add_integer([0], {})
+Traceback (most recent call last):
+...
+TypeError: a must be an integer or b must be an integer
+
+# Pass in a string instead of an integer for parameter b
+>>> add_integer(5, "terry")
+Traceback (most recent call last):
+...
+TypeError: a must be an integer or b must be an integer
+
+# Pass no arguments
+>>> add_integer(None)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer or b must be an integer
+
+# Converting float infinity to integer errors
+>>> add_integer(float('inf'), 2)
+Traceback (most recent call last):
+...
+OverflowError: cannot convert float infinity to integer
+
+# Converting float NaN to integer errors
+>>> add_integer(float('NaN'), 2)
+Traceback (most recent call last):
+...
+ValueError: cannot convert float NaN to integer
