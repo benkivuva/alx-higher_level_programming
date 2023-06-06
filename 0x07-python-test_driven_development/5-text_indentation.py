@@ -8,7 +8,7 @@ def text_indentation(text):
         text (str): The input text.
 
     Raises:
-        TypeError: If text is not a string.
+        TypeError: If text isnt a string.
     """
 
     if not isinstance(text, str):
