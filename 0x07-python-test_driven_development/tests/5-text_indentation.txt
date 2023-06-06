@@ -1,0 +1,33 @@
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+    # Function: text_indentation
+
+    The function prints a text with 2 new lines after each occurrence of ., ? and :.
+
+    # Test case: Regular text
+    >>> text_indentation("Hello. How are you?")
+    Hello.
+    
+    How are you?
+
+    # Test case: Multiple occurrences of ., ? and :
+    >>> text_indentation("This is a sentence. It has multiple punctuation marks: ? !")
+    This is a sentence.
+    
+    It has multiple punctuation marks:
+    
+    ?
+    
+    !
+    
+    # Test case: No occurrence of ., ? and :
+    >>> text_indentation("This is a sentence without punctuation marks")
+    This is a sentence without punctuation marks
+
+    # Error cases
+
+    # Pass a non-string value for text
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
