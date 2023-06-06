@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-class LockedClass:
-    __slots__ = ['first_name']
+'''Module for LockedClass.'''
 
-    def __setattr__(self, name, value):
-        if name != 'first_name':
-            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
-        self.__dict__[name] = value
+
+class LockedClass:
+    '''A class demonstrating locked slots.'''
+    __slots__ = 'first_name',
