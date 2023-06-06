@@ -8,7 +8,7 @@
 >>> add_integer(0)
 98
 >>> add_integer(55, 34)
-69
+89
 >>> add_integer(1)
 99
 >>> add_integer(.1)
@@ -31,7 +31,7 @@ Traceback (most recent call last):
 TypeError: a must be an integer or b must be an integer
 
 # Pass in a string instead of an integer for parameter b
->>> add_integer(5, "terry")
+>>> add_integer(5, "romelu")
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer or b must be an integer
