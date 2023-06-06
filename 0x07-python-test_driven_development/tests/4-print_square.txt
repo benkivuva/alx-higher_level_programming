@@ -1,0 +1,40 @@
+    >>> print_square = __import__('4-print_square').print_square
+
+    # Function: print_square
+
+    The function prints a square with the character '#'.
+
+    # Test case: Positive size
+    >>> print_square(5)
+    #####
+    #####
+    #####
+    #####
+    #####
+
+    # Test case: Size of 1
+    >>> print_square(1)
+    #
+
+    # Test case: Size of 0
+    >>> print_square(0)
+
+    # Error cases
+
+    # Pass a non-integer value for size
+    >>> print_square(3.5)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    # Pass a negative size
+    >>> print_square(-2)
+    Traceback (most recent call last):
+    ...
+    ValueError: size must be >= 0
+
+    # Pass a float size less than 0
+    >>> print_square(-3.0)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
