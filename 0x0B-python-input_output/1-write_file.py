@@ -2,7 +2,7 @@
 """ define number_of_lines function """
 
 
-def number_of_lines(filename=""):
-    """ returns the number of lines of a text file """
+def write_file(filename="", text=""):
+    """function that write a file"""
     with open(filename, "w+", encoding="utf_8") as file:
         return file.write(text)
