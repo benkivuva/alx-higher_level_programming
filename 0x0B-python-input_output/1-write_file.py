@@ -4,5 +4,5 @@
 
 def number_of_lines(filename=""):
     """ returns the number of lines of a text file """
-    with open(filename, encoding='utf-8') as f:
-        return len(f.readlines())
+    with open(filename, "w+", encoding="utf_8") as file:
+        return file.write(text)
