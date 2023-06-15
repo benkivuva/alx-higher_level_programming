@@ -21,6 +21,9 @@ class Rectangle(Base):
         __init__(self, width, height, x=0, y=0, id=None):
             Initializes a Rectangle instance.
 
+        area(self):
+            Returns the area value of the Rectangle instance.
+
         Properties (getters and setters):
             width
             height
@@ -103,3 +106,12 @@ class Rectangle(Base):
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """
+        Calculate and return the area of the rectangle.
+
+        Returns:
+            int: Area of the rectangle.
+        """
+        return self.__width * self.__height
