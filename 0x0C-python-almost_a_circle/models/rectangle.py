@@ -35,12 +35,12 @@ class Rectangle(Base):
         Args:
             width (int): Width of the rectangle.
             height (int): Height of the rectangle.
-            x (int, optional): x-coordinate of the rectangle's position. Defaults to 0.
-            y (int, optional): y-coordinate of the rectangle's position. Defaults to 0.
+            x (int, optional): x-cordinat of rectangle position. Defaults to 0.
+            y (int, optional): y-cordinat of rectangle position. Defaults to 0.
             id (int, optional): ID of the rectangle. Defaults to None.
 
         Note:
-            The __init__ method of the Base class is called to handle the ID assignment.
+            The __init__ method of Base class is called to handle ID assignment
         """
         super().__init__(id)
         self.width = width
