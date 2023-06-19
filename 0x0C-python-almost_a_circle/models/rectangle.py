@@ -30,6 +30,8 @@ class Rectangle(Base):
         __str__(self):
             Returns a string representation of the Rectangle instance.
 
+        update(self, *args):
+            Assigns arguments to each attribute of the Rectangle instance.
 
         Properties (getters and setters):
             width
@@ -126,8 +128,11 @@ class Rectangle(Base):
     def display(self):
         """
         Print the Rectangle instance using the character '#'.
+        Takes care of the position using x and y coordinates.
         """
+        print('\n' * self.__y, end='')
         for _ in range(self.__height):
+            print(' ' * self.__x, end='')
             print('#' * self.__width)
 
     def __str__(self):
@@ -140,3 +145,22 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.__x, self.__y, self.__width, self.__height
         )
+
+    def update(self, *args):
+        """
+        Assign arguments to each attribute of the Rectangle instance.
+
+        Args:
+            *args: Arguments in the order: id, width, height, x, y.
+        """
+        if len(args) >= 1:
+            self.id = args[0]
+        if len(args) >= 2:
+            self.width = args[1]
+        if len(args) >= 3:
+            self.height = args[2]
+        if len(args) >= 4:
+            self.x = args[3]
+        if len(args) >= 5:
+            self.y = args[4]
+
