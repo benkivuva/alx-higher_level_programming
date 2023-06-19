@@ -16,10 +16,10 @@ class Base:
 
     Methods:
         __init__(self, id=None): Constructor method for Base class.
-        to_json_string(list_dictionaries): Convert list of dictionaries to JSON string.
-        save_to_file(cls, list_objs): Save list of instances to a file as a JSON string.
-        from_json_string(json_string): Convert JSON string to list of dictionaries.
-        create(cls, **dictionary): Create an instance with attributes from a dictionary.
+        to_json_string(list_dictionaries): Convert list of dict to JSON string.
+        save_to_file(cls, list_objs): Save lst of instanc to a file as JSON str
+        from_json_string(json_string): Convert JSON str to lst of dictionaries.
+        create(cls, **dictionary): Create an instance with ats frm dictionary.
         load_from_file(cls): Load instances from a file.
         save_to_file_csv(cls, list_objs): Save list of instances to a file as a CSV.
         load_from_file_csv(cls): Load instances from a CSV file.

@@ -155,7 +155,7 @@ class Rectangle(Base):
 
         Args:
             *args: No-keyword arguments in the order: id, width, height, x, y.
-            **kwargs: Key-worded arguments representing attribute names and values.
+            **kwargs: Keyworded arguments representin atribute names and values
 
         Note:
             If *args exists and is not empty, **kwargs is skipped.

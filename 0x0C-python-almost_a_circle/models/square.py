@@ -35,8 +35,8 @@ class Square(Rectangle):
 
         Args:
             size (int): Size of the square.
-            x (int, optional): x-coordinate of the square's position. Defaults to 0.
-            y (int, optional): y-coordinate of the square's position. Defaults to 0.
+            x (int, optional): x-cord of the square's position. Defaults to 0.
+            y (int, optional): y-cord of the square's position. Defaults to 0.
             id (int, optional): ID of the square. Defaults to None.
 
         Note:
@@ -63,7 +63,7 @@ class Square(Rectangle):
         Returns:
             str: String representation of the Square instance.
         """
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
 
     def update(self, *args, **kwargs):
         """
