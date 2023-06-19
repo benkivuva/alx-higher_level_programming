@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-"""This module defines the Base class."""
+"""
+This module defines the Base class.
+"""
 
 import json
 
@@ -13,9 +15,10 @@ class Base:
 
     Methods:
         __init__(self, id=None): Constructor method for Base class.
-        to_json_string(list_dictionaries): Static method to return the JSON string representation of list_dictionaries.
-        save_to_file(cls, list_objs): Class method to write the JSON string representation of list_objs to a file.
-        from_json_string(json_string): Static method to return the list represented by json_string.
+        to_json_string(list_dictionaries): Convert list of dictionaries to JSON string.
+        save_to_file(cls, list_objs): Save list of instances to a file.
+        from_json_string(json_string): Convert JSON string to list of dictionaries.
+        create(cls, **dictionary): Create an instance with attributes from a dictionary.
 
     """
 
@@ -28,7 +31,7 @@ class Base:
             id (int, optional): The ID to assign. Defaults to None.
 
         Note:
-            If id is provided it will be assigned to the instance attribute 'id'.
+            If id is provided, it will be assigned to the instance attribute 'id'.
             If id is not provided, a unique ID will be generated and assigned.
 
         """
@@ -40,13 +43,13 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Return the JSON string representation of list_dictionaries.
+        """Convert list of dictionaries to JSON string.
 
         Args:
-            list_dictionaries (list): A list of dictionaries.
+            list_dictionaries (list): List of dictionaries to convert.
 
         Returns:
-            str: The JSON string representation of list_dictionaries.
+            str: JSON string representation of the list of dictionaries.
 
         """
         if list_dictionaries is None or len(list_dictionaries) == 0:
@@ -55,30 +58,55 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """Write the JSON string representation of list_objs to a file.
+        """Save list of instances to a file as a JSON string.
 
         Args:
-            list_objs (list): A list of instances that inherit from Base.
+            list_objs (list): List of instances to save.
+
+        Note:
+            The filename will be <Class name>.json (e.g., Rectangle.json).
 
         """
+        if list_objs is None:
+            list_objs = []
         filename = cls.__name__ + ".json"
-        json_list = []
-        if list_objs is not None:
-            json_list = [obj.to_dictionary() for obj in list_objs]
-        with open(filename, "w") as file:
-            file.write(cls.to_json_string(json_list))
+        obj_dicts = [obj.to_dictionary() for obj in list_objs]
+        json_str = cls.to_json_string(obj_dicts)
+        with open(filename, mode='w', encoding='utf-8') as file:
+            file.write(json_str)
 
     @staticmethod
     def from_json_string(json_string):
-        """Return the list represented by json_string.
+        """Convert JSON string to list of dictionaries.
 
         Args:
-            json_string (str): A string representing a list of dictionaries.
+            json_string (str): JSON string representing a list of dictionaries.
 
         Returns:
-            list: The list represented by json_string.
+            list: List of dictionaries represented by the JSON string.
 
         """
-        if json_string is None or json_string == "":
+        if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Return an instance with all attributes already set.
+
+        Args:
+            **dictionary: Double pointer to a dictionary representing attribute names and values.
+
+        Returns:
+            Base: An instance with attributes set according to the dictionary.
+
+        """
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)  # Create a dummy Rectangle instance
+        elif cls.__name__ == "Square":
+            dummy = cls(1)  # Create a dummy Square instance
+        else:
+            dummy = None
+
+        dummy.update(**dictionary)  # Update the dummy instance with the dictionary
+        return dummy
