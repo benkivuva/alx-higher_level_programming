@@ -4,6 +4,7 @@
 This module defines the Base class.
 """
 
+import csv
 import json
 
 
@@ -16,10 +17,12 @@ class Base:
     Methods:
         __init__(self, id=None): Constructor method for Base class.
         to_json_string(list_dictionaries): Convert list of dictionaries to JSON string.
-        save_to_file(cls, list_objs): Save list of instances to a file.
+        save_to_file(cls, list_objs): Save list of instances to a file as a JSON string.
         from_json_string(json_string): Convert JSON string to list of dictionaries.
         create(cls, **dictionary): Create an instance with attributes from a dictionary.
         load_from_file(cls): Load instances from a file.
+        save_to_file_csv(cls, list_objs): Save list of instances to a file as a CSV.
+        load_from_file_csv(cls): Load instances from a CSV file.
 
     """
 
@@ -103,13 +106,13 @@ class Base:
 
         """
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
+            dummy = cls(1, 1)  # Create a dummy Rectangle instance
         elif cls.__name__ == "Square":
-            dummy = cls(1)
+            dummy = cls(1)  # Create a dummy Square instance
         else:
             dummy = None
 
-        dummy.update(**dictionary)
+        dummy.update(**dictionary)  # Update the dummy instance with the actual attribute values
         return dummy
 
     @classmethod
@@ -119,6 +122,9 @@ class Base:
         Returns:
             list: List of instances loaded from the file.
 
+        Note:
+            The filename will be <Class name>.json (e.g., Rectangle.json).
+
         """
         filename = cls.__name__ + ".json"
         try:
@@ -126,5 +132,67 @@ class Base:
                 json_str = file.read()
                 dict_list = cls.from_json_string(json_str)
                 return [cls.create(**dict_data) for dict_data in dict_list]
+        except FileNotFoundError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Save list of instances to a file as a CSV.
+
+        Args:
+            list_objs (list): List of instances to save.
+
+        Note:
+            The filename will be <Class name>.csv (e.g., Rectangle.csv).
+            Format of the CSV: Rectangle: <id>,<width>,<height>,<x>,<y> | Square: <id>,<size>,<x>,<y>.
+
+        """
+        if list_objs is None:
+            list_objs = []
+        filename = cls.__name__ + ".csv"
+        with open(filename, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
+                elif cls.__name__ == "Square":
+                    row = [obj.id, obj.size, obj.x, obj.y]
+                writer.writerow(row)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Load instances from a CSV file.
+
+        Returns:
+            list: List of instances loaded from the file.
+
+        Note:
+            The filename will be <Class name>.csv (e.g., Rectangle.csv).
+
+        """
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, mode='r', newline='', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                instance_list = []
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        dict_data = {
+                            'id': int(row[0]),
+                            'width': int(row[1]),
+                            'height': int(row[2]),
+                            'x': int(row[3]),
+                            'y': int(row[4])
+                        }
+                    elif cls.__name__ == "Square":
+                        dict_data = {
+                            'id': int(row[0]),
+                            'size': int(row[1]),
+                            'x': int(row[2]),
+                            'y': int(row[3])
+                        }
+                    instance = cls.create(**dict_data)
+                    instance_list.append(instance)
+                return instance_list
         except FileNotFoundError:
             return []
