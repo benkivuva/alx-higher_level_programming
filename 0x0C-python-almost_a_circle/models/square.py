@@ -24,6 +24,9 @@ class Square(Rectangle):
             y
         update(self, *args, **kwargs):
             Assigns attributes to the Square instance.
+
+        to_dictionary(self):
+            Returns the dictionary representation of a Square instance.
     """
 
     def __init__(self, size, x=0, y=0, id=None):
@@ -82,3 +85,17 @@ class Square(Rectangle):
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """
+        Return the dictionary representation of a Square.
+
+        Returns:
+            dict: Dictionary representation of the Square instance.
+        """
+        return {
+            "id": self.id,
+            "size": self.size,
+            "x": self.x,
+            "y": self.y
+        }
