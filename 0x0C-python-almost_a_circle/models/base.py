@@ -19,6 +19,7 @@ class Base:
         save_to_file(cls, list_objs): Save list of instances to a file.
         from_json_string(json_string): Convert JSON string to list of dictionaries.
         create(cls, **dictionary): Create an instance with attributes from a dictionary.
+        load_from_file(cls): Load instances from a file.
 
     """
 
@@ -102,11 +103,28 @@ class Base:
 
         """
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)  # Create a dummy Rectangle instance
+            dummy = cls(1, 1)
         elif cls.__name__ == "Square":
-            dummy = cls(1)  # Create a dummy Square instance
+            dummy = cls(1)
         else:
             dummy = None
 
-        dummy.update(**dictionary)  # Update the dummy instance with the dictionary
+        dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Load instances from a file.
+
+        Returns:
+            list: List of instances loaded from the file.
+
+        """
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, mode='r', encoding='utf-8') as file:
+                json_str = file.read()
+                dict_list = cls.from_json_string(json_str)
+                return [cls.create(**dict_data) for dict_data in dict_list]
+        except FileNotFoundError:
+            return []
