@@ -22,6 +22,8 @@ class Square(Rectangle):
             size
             x
             y
+        update(self, *args, **kwargs):
+            Assigns attributes to the Square instance.
     """
 
     def __init__(self, size, x=0, y=0, id=None):
@@ -59,3 +61,24 @@ class Square(Rectangle):
             str: String representation of the Square instance.
         """
         return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+
+    def update(self, *args, **kwargs):
+        """
+        Assign attributes to the Square instance.
+
+        Args:
+            *args: List of arguments.
+            **kwargs: Dictionary of keyworded arguments.
+
+        Note:
+            *args must follow the order: id, size, x, y.
+            **kwargs can contain any combination of attributes.
+        """
+        if args:
+            attrs = ["id", "size", "x", "y"]
+            for i, arg in enumerate(args):
+                if i < len(attrs):
+                    setattr(self, attrs[i], arg)
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
