@@ -12,6 +12,7 @@ class Base:
     Methods:
         __init__(self, id=None): Constructor method for Base class.
         to_json_string(list_dictionaries): Static method to convert list of dictionaries to JSON string.
+        save_to_file(cls, list_objs): Class method to save instances to a file.
 
     """
 
@@ -50,3 +51,20 @@ class Base:
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """Save instances to a file in JSON format.
+
+        Args:
+            list_objs (list): A list of instances.
+
+        """
+        import json
+
+        filename = cls.__name__ + ".json"
+        data = []
+        if list_objs is not None:
+            data = [obj.to_dictionary() for obj in list_objs]
+        with open(filename, "w") as file:
+            file.write(cls.to_json_string(data))
