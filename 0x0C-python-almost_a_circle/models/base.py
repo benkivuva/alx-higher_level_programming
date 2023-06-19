@@ -2,6 +2,8 @@
 
 """This module defines the Base class."""
 
+import json
+
 
 class Base:
     """Base class for managing ID attributes.
@@ -11,8 +13,9 @@ class Base:
 
     Methods:
         __init__(self, id=None): Constructor method for Base class.
-        to_json_string(list_dictionaries): Static method to convert list of dictionaries to JSON string.
-        save_to_file(cls, list_objs): Class method to save instances to a file.
+        to_json_string(list_dictionaries): Static method to return the JSON string representation of list_dictionaries.
+        save_to_file(cls, list_objs): Class method to write the JSON string representation of list_objs to a file.
+        from_json_string(json_string): Static method to return the list represented by json_string.
 
     """
 
@@ -37,34 +40,45 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Convert a list of dictionaries to a JSON string.
+        """Return the JSON string representation of list_dictionaries.
 
         Args:
             list_dictionaries (list): A list of dictionaries.
 
         Returns:
-            str: JSON string representation of list_dictionaries.
+            str: The JSON string representation of list_dictionaries.
 
         """
-        import json
-
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """Save instances to a file in JSON format.
+        """Write the JSON string representation of list_objs to a file.
 
         Args:
-            list_objs (list): A list of instances.
+            list_objs (list): A list of instances that inherit from Base.
 
         """
-        import json
-
         filename = cls.__name__ + ".json"
-        data = []
+        json_list = []
         if list_objs is not None:
-            data = [obj.to_dictionary() for obj in list_objs]
+            json_list = [obj.to_dictionary() for obj in list_objs]
         with open(filename, "w") as file:
-            file.write(cls.to_json_string(data))
+            file.write(cls.to_json_string(json_list))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """Return the list represented by json_string.
+
+        Args:
+            json_string (str): A string representing a list of dictionaries.
+
+        Returns:
+            list: The list represented by json_string.
+
+        """
+        if json_string is None or json_string == "":
+            return []
+        return json.loads(json_string)
