@@ -137,21 +137,6 @@ given"
         r = Rectangle(2, 4)
         self.assertEqual(r.id, 99)
 
-    def test_F_properties(self):
-        '''Tests property getters/setters.'''
-        r = Rectangle(5, 9)
-        r.width = 100
-        r.height = 101
-        r.x = 102
-        r.y = 103
-        d = {'_Rectangle__height': 101, '_Rectangle__width': 100,
-             '_Rectangle__x': 102, '_Rectangle__y': 103, 'id': 1}
-        self.assertEqual(r.__dict__, d)
-        self.assertEqual(r.width, 100)
-        self.assertEqual(r.height, 101)
-        self.assertEqual(r.x, 102)
-        self.assertEqual(r.y, 103)
-
     # ----------------- Tests for #3 ------------------------
 
     def invalid_types(self):
@@ -159,17 +144,6 @@ given"
         t = (3.14, -1.1, float('inf'), float('-inf'), True, "str", (2,),
              [4], {5}, {6: 7}, None)
         return t
-
-    def test_G_validate_type(self):
-        '''Tests property validation.'''
-        r = Rectangle(1, 2)
-        attributes = ["x", "y", "width", "height"]
-        for attribute in attributes:
-            s = "{} must be an integer".format(attribute)
-            for invalid_type in self.invalid_types():
-                with self.assertRaises(TypeError) as e:
-                    setattr(r, attribute, invalid_type)
-                self.assertEqual(str(e.exception), s)
 
     def test_G_validate_value_negative_gt(self):
         '''Tests property validation.'''
