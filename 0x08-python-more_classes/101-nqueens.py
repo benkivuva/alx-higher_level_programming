@@ -1,82 +1,52 @@
 #!/usr/bin/python3
-"""
-N-Queens Solver
-"""
-
-import sys
+'''Module for N Queens problem.'''
 
 
-def is_safe(board, row, col):
-    """
-    Check if it's safe to place a queen at board[row][col]
-    """
-    # Check the left side of the current row
-    for i in range(col):
-        if board[row][i] == 'Q':
+def isSafe(board, row, col):
+    '''Checks if position is safe from attack.
+
+    Args:
+        board: The board state.
+        row: The row to check.
+        col: The colum to check.
+    '''
+    for c in range(col):
+        if board[c] is row or abs(board[c] - row) is abs(c - col):
             return False
-
-    # Check the upper diagonal on the left side
-    i, j = row, col
-    while i >= 0 and j >= 0:
-        if board[i][j] == 'Q':
-            return False
-        i -= 1
-        j -= 1
-
-    # Check the lower diagonal on the left side
-    i, j = row, col
-    while i < N and j >= 0:
-        if board[i][j] == 'Q':
-            return False
-        i += 1
-        j -= 1
-
     return True
 
 
-def solve_nqueens(board, col):
-    """
-    Recursive function to solve the N-Queens problem
-    """
-    # Base case: all queens are placed
-    if col >= N:
-        print_solution(board)
+def checkBoard(board, col):
+    '''Checks the board state column by column using backtracking.
+
+    Args:
+        board: The board state.
+        col: The current colum to check.
+    '''
+    n = len(board)
+    if col is n:
+        print(str([[c, board[c]] for c in range(n)]))
         return
 
-    for row in range(N):
-        if is_safe(board, row, col):
-            board[row][col] = 'Q'
-            solve_nqueens(board, col + 1)
-            board[row][col] = '.'
+    for row in range(n):
+        if isSafe(board, row, col):
+            board[col] = row
+            checkBoard(board, col + 1)
 
-def print_solution(board):
-    """
-    Print the current configuration of the board
-    """
-    for row in board:
-        print(" ".join(row))
-    print()
-
-
-# Main program
 if __name__ == "__main__":
-    # Get N from command line argument
+    import sys
+
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-
+    n = 0
     try:
-        N = int(sys.argv[1])
-    except ValueError:
+        n = int(sys.argv[1])
+    except:
         print("N must be a number")
         sys.exit(1)
-
-    if N < 4:
+    if n < 4:
         print("N must be at least 4")
         sys.exit(1)
-
-    # Create an empty board
-    board = [['.' for _ in range(N)] for _ in range(N)]
-
-    # Solve the N-Queens problem
-    solve_nqueens(board, 0)
+    board = [0 for col in range(n)]
+    checkBoard(board, 0)
