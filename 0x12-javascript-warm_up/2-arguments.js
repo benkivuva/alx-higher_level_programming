@@ -1,13 +1,12 @@
 #!/usr/bin/node
-
-let y;
-
-if (process.argv.length < 3) {
-    y = 'No argument';
-} else if (process.argv.length === 3) {
-    y = 'Argument found';
-} else {
-    y = 'Arguments found';
-}
-
-console.log(y);
+switch (process.argv.length) {
+    case 2:
+      console.log('No argument');
+      break;
+    case 3:
+      console.log('Argument found');
+      break;
+    default:
+      console.log('Arguments found');
+  }
+  
