@@ -4,7 +4,6 @@ Python script that takes in a letter, and sends a POST request to the
 passed URL with the letter as a parameter
 """
 if __name__ == "__main__":
-
     import requests
     import sys
 
@@ -18,12 +17,15 @@ if __name__ == "__main__":
         else:
             data = {'q': ''}
         response = requests.post(url, data)
-        try:
-            json_response = response.json()
-            if not json_response.get('id'):
-                print("No result")
-            else:
-                print("[{}] {}".format(json_response.get('id'),
-                                       json_response.get('name')))
-        except:
-            print("Not a valid JSON")
+        if response.status_code != 200:
+            print("No result")
+        else:
+            try:
+                json_response = response.json()
+                if not json_response.get('id'):
+                    print("No result")
+                else:
+                    print("[{}] {}".format(json_response.get('id'),
+                                           json_response.get('name')))
+            except ValueError:
+                print("Not a valid JSON")
