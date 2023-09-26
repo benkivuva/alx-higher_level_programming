@@ -5,7 +5,7 @@ const request = require('request');
 const fs = require('fs');
 
 request(myArray[0], function (error, response, body) {
-  if (error) console.error('error:', error); 
+  if (error) console.error('error:', error);
   fs.writeFile(myArray[1], body, (err, data) => {
     if (err) console.log(err);
   });
