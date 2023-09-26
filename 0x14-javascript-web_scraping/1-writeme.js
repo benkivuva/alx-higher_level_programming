@@ -1,7 +1,6 @@
 #!/usr/bin/node
-// Script that makes a get request and prints the status code
-const request = require('request');
-request(process.argv[2], function (error, response, body) {
+// a script that writes a string to a file.
+const fs = require('fs');
+fs.writeFile(process.argv[2], process.argv[3], (error) => {
   error && console.log(error);
-  response && console.log('code:', response.statusCode);
 });
