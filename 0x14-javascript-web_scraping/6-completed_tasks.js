@@ -4,7 +4,7 @@ const myArray = process.argv.slice(2);
 const request = require('request');
 
 request(myArray[0], function (error, response, body) {
-  if (error) console.error('error:', error); 
+  if (error) console.error('error:', error);
   const newDict = {};
   if (JSON.parse(body)) {
     let count = 0;
