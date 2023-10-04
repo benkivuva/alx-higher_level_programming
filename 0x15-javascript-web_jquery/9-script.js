@@ -1,6 +1,6 @@
 $.ajax(
   {
-    url: 'https://fourtonfish.com/hellosalut/?lang=fr',
+    url: 'https://hellosalut.stefanbohacek.dev/?lang=fr',
     type: 'GET',
     dataType: 'json',
     success: function (response) { $('#hello').text(response.hello); }
